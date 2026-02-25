@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21cmFAST Simulation Visualizations</title>
+    <style>
+        :root {
+            --sidebar-width: 300px;
+            --accent-color: #1a73e8;
+            --bg-color: #f0f2f5;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden; /* Fixes the app-like feel */
+        }
+
+        /* SIDEBAR - Desktop */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: #ffffff;
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        .sidebar h2 {
+            padding: 20px;
+            margin: 0;
+            font-size: 1.1rem;
+            background-color: #fafafa;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .menu li {
+            padding: 15px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid #f5f5f5;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .menu li:hover { background-color: #f8f9fa; }
+
+        .menu li.active {
+            background-color: #e8f0fe;
+            color: var(--accent-color);
+            font-weight: 600;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        /* MAIN CONTENT AREA */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            min-height: 0; /* Important for flex-grow behavior */
+        }
+
+        .iframe-wrapper {
+            position: relative;
+            flex: 1;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+            display: flex; /* Helps center the loader */
+            justify-content: center;
+            align-items: center;
+        }
+
+        iframe {
+            position: absolute; /* Sits on top of the loader */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        iframe.loaded {
+            opacity: 1;
+        }
+
+        /* LOADING SCREEN ANIMATION */
+        .loader {
+            position: absolute;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--accent-color);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader span {
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* MOBILE ADAPTATION */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .menu {
+                display: flex;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .menu li {
+                padding: 12px 18px;
+                border-bottom: none;
+                flex-shrink: 0;
+            }
+
+            .menu li.active {
+                border-left: none;
+                border-bottom: 3px solid var(--accent-color);
+            }
+
+            .main-content { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>21cm Simulation Data</h2>
+        <ul class="menu" id="menu">
+            <li class="active" data-src="global_frequency_spectrum.html">Global Frequency Spectrum</li>
+            <li data-src="mean2d_brightness_temperature.html">Mean 2D Brightness Temp</li>
+            <li data-src="spherically_averaged_power_spectrum.html">Spherically Avg Power Spectrum</li>
+            <li data-src="cylindrically_averaged_power_spectrum_redshift_slider.html">Cylindrical Power (Slider)</li>
+            <li data-src="3d_cylindrical_power_spectra.html">3D Cylindrical Power Spectra</li>
+            <li data-src="heatmap_slice_0_z_12.7877.html">Static Slice (z=12.78)</li>
+            <li data-src="heatmap_slice_slider_z_12.7877.html">Slice Slider (z=12.78)</li>
+            <li data-src="Evolution_of_Brightness_Temperature_Slice.html">Evolution of Slice</li>
+            <li data-src="heatmap_light_cone.html">Heatmap Light Cone</li>
+            <li data-src="volume_brightness_temperature_redshift_slider.html">Volume Redshift Slider (3D)</li>
+            <li data-src="volume_light_cone.html">Volume Light Cone (3D)</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="iframe-wrapper">
+            <div class="loader" id="loader">
+                <div class="spinner"></div>
+                <span>Loading Simulation...</span>
+            </div>
+            <iframe id="plot-frame" src="global_frequency_spectrum.html"></iframe>
+        </div>
+    </div>
+
+    <script>
+        const menuItems = document.querySelectorAll('.menu li');
+        const iframe = document.getElementById('plot-frame');
+        const loader = document.getElementById('loader');
+
+        // Initial load
+        iframe.onload = () => {
+            loader.style.opacity = '0'; // Smoothly hide loader
+            setTimeout(() => { loader.style.display = 'none'; }, 300);
+            iframe.classList.add('loaded');
+        };
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                if (this.classList.contains('active')) return;
+
+                menuItems.forEach(li => li.classList.remove('active'));
+                this.classList.add('active');
+                
+                const newSrc = this.getAttribute('data-src');
+                
+                // Reset state for new plot
+                iframe.classList.remove('loaded');
+                loader.style.display = 'flex';
+                loader.style.opacity = '1';
+                
+                iframe.src = newSrc;
+
+                // Center active item in scroll for mobile
+                this.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            });
+        });
+    </script>
+</body>
+</html>
