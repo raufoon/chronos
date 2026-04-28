@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21cmFAST Simulation Documentation</title>
+
+    <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-light.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-color-rgb: 255, 255, 255;
+            --bg-color: rgb(var(--bg-color-rgb));
+            --text-color: #333333;
+            --sidebar-bg: #f5f5f5;
+            --sidebar-border: #e0e0e0;
+            --accent-color: #1a73e8;
+            --island-bg: #fafafa;
+            
+            --code-drawer-bg: #f1f3f4;
+            --code-drawer-hover: #e8eaed;
+            --code-drawer-text: #202124;
+            --code-drawer-border: #dadce0;
+
+            --compact-header-height: 70px;
+        }
+
+        [data-theme="dark"] {
+            --bg-color-rgb: 18, 18, 18;
+            --bg-color: rgb(var(--bg-color-rgb));
+            --text-color: #e0e0e0;
+            --sidebar-bg: #1e1e1e;
+            --sidebar-border: #333333;
+            --accent-color: #64b5f6;
+            --island-bg: #1e1e1e;
+            
+            --code-drawer-bg: #1a1a1a;
+            --code-drawer-hover: #2d2d2d;
+            --code-drawer-text: #e0e0e0;
+            --code-drawer-border: #333333;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Spinner Animation */
+        .spinner {
+            border: 4px solid var(--sidebar-border);
+            border-top: 4px solid var(--accent-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Layout Elements */
+        .controls-container { position: fixed; top: 15px; right: 20px; display: flex; gap: 10px; z-index: 1000; }
+        .icon-btn { background-color: var(--sidebar-bg); color: var(--text-color); border: 1px solid var(--sidebar-border); border-radius: 50%; width: 45px; height: 45px; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: background-color 0.2s, transform 0.1s; }
+        .icon-btn:hover { transform: scale(1.05); }
+        .menu-toggle { position: fixed; top: 15px; left: 20px; z-index: 1000; } 
+
+        /* Sidebar Drawer */
+        .drawer { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            height: 100vh; 
+            width: 280px; 
+            background-color: var(--sidebar-bg); 
+            border-right: 1px solid var(--sidebar-border); 
+            padding: 80px 20px 20px 20px; 
+            overflow-y: auto; 
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s, border-color 0.3s; 
+            box-sizing: border-box; 
+            z-index: 900; 
+            box-shadow: 4px 0 15px rgba(0,0,0,0.05);
+            transform: translateX(0); 
+        }
+        .drawer.collapsed { transform: translateX(-100%); } 
+        .drawer h2 { font-size: 1.2rem; margin-top: 0; color: var(--text-color); }
+        .drawer ul { list-style: none; padding: 0; margin: 0; }
+        .drawer li { margin-bottom: 10px; }
+        .drawer a { text-decoration: none; color: var(--text-color); font-size: 0.95rem; display: block; padding: 5px 0; transition: color 0.2s; }
+        .drawer a:hover { color: var(--accent-color); }
+        .drawer .sub-menu { padding-left: 15px; font-size: 0.9rem; }
+
+        .main-content { flex: 1; overflow-y: auto; scroll-behavior: smooth; display: flex; flex-direction: column; position: relative; width: 100%; }
+        
+        .title-block { position: sticky; top: 0; z-index: 80; background-color: var(--bg-color); text-align: center; padding: 80px 20px; border-bottom: 1px solid transparent; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s; display: flex; align-items: center; justify-content: center; min-height: var(--compact-header-height); box-sizing: border-box; }
+        .title-block h1 { font-size: 3.5rem; margin: 0; padding: 0; position: static; border: none; transition: font-size 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s; color: var(--text-color); }
+        .title-block.compact { padding: 15px 20px; border-bottom: 1px solid var(--sidebar-border); box-shadow: 0 4px 15px rgba(0,0,0,0.05); background-color: rgba(var(--bg-color-rgb), 0.95); backdrop-filter: blur(5px); }
+        .title-block.compact h1 { font-size: 1.5rem; }
+
+        .content-container { max-width: 900px; margin: 0 auto; padding: 20px 40px 80px 40px; width: 100%; box-sizing: border-box; flex: 1; }
+        p { line-height: 1.6; font-size: 1.05rem; }
+
+        .content-container h1, .content-container h2 { color: var(--text-color); position: sticky; background-color: var(--bg-color); z-index: 20; margin-top: 0; transition: background-color 0.3s, color 0.3s; }
+        .content-container h1 { top: var(--compact-header-height); padding: 25px 0 10px 0; border-bottom: 1px solid var(--sidebar-border); font-size: 2rem; }
+        .content-container h2 { top: calc(var(--compact-header-height) + 65px); padding: 15px 0 10px 0; font-size: 1.4rem; }
+
+        /* --- CITATION SYSTEM STYLES --- */
+        citenote {
+            position: relative;
+            cursor: help;
+            color: var(--accent-color);
+            font-weight: bold;
+            font-style: normal;
+            margin-left: 2px;
+            font-size: 0.8rem;
+            vertical-align: super;
+            display: inline-block;
+        }
+
+        .citation-tooltip {
+            visibility: hidden;
+            position: absolute;
+            bottom: 150%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--island-bg);
+            color: var(--text-color);
+            border: 1px solid var(--sidebar-border);
+            padding: 15px;
+            border-radius: 8px;
+            width: max-content;
+            max-width: 380px; 
+            font-size: 0.9rem;
+            font-weight: normal;
+            text-align: left;
+            line-height: 1.5;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            pointer-events: none;
+            white-space: normal;
+        }
+
+        .citation-tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -6px;
+            border-width: 6px;
+            border-style: solid;
+            border-color: var(--island-bg) transparent transparent transparent;
+        }
+
+        citenote:hover .citation-tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .tooltip-row { margin-bottom: 10px; display: flex; flex-direction: column; gap: 4px; }
+        .tooltip-row:last-child { margin-bottom: 0; }
+        .tooltip-label { font-weight: 700; color: var(--accent-color); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.8px; }
+
+        #references-section { border-top: 1px solid var(--sidebar-border); margin-top: 60px; padding-top: 40px; }
+        #references-list { list-style: none; padding: 0; }
+        #references-list li { margin-bottom: 20px; line-height: 1.6; font-size: 0.95rem; }
+
+        .graph-island { width: 100%; background-color: var(--island-bg); border-radius: 12px; margin: 2.5rem 0; padding: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); box-sizing: border-box; transition: background-color 0.3s; }
+        
+        .iframe-container { width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; overflow: hidden; background-color: white; position: relative; }
+        .iframe-loader { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: white; display: flex; align-items: center; justify-content: center; z-index: 2; transition: opacity 0.3s ease, visibility 0.3s ease; }
+        .iframe-loader.hidden { opacity: 0; visibility: hidden; }
+        iframe { width: 100%; height: 100%; border: none; opacity: 0; position: relative; z-index: 3; transition: opacity 0.3s ease; }
+        iframe.loaded { opacity: 1; }
+
+        .reload-btn {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            z-index: 5; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .reload-btn:hover { background-color: rgba(255, 255, 255, 1); transform: scale(1.05); }
+        .reload-btn svg { width: 18px; height: 18px; fill: #333; }
+        [data-theme="dark"] .reload-btn { background-color: rgba(30, 30, 30, 0.85); border-color: #444; }
+        [data-theme="dark"] .reload-btn svg { fill: #e0e0e0; }
+
+        /* Floating Credits Button */
+        .float-credits-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.1s;
+            background-color: var(--sidebar-bg);
+            color: var(--text-color);
+            border: 1px solid var(--sidebar-border);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .float-credits-btn.visible { opacity: 1; visibility: visible; }
+        .float-credits-btn:hover { transform: scale(1.05); }
+
+        details { margin-top: 15px; background-color: var(--code-drawer-bg); border: 1px solid var(--code-drawer-border); border-radius: 8px; overflow: hidden; transition: background-color 0.3s, border-color 0.3s; }
+        summary { padding: 12px 15px; color: var(--code-drawer-text); cursor: pointer; font-weight: bold; outline: none; user-select: none; transition: background-color 0.2s, color 0.3s; }
+        summary:hover { background-color: var(--code-drawer-hover); }
+        pre { margin: 0; padding: 0; }
+        code.hljs { padding: 15px; font-size: 0.9rem; border-top: 1px solid var(--code-drawer-border); border-radius: 0 0 8px 8px; overflow-x: auto; }
+
+        /* Footer */
+        .site-footer { display: flex; justify-content: space-between; align-items: center; padding: 30px 40px; border-top: 1px solid var(--sidebar-border); background-color: var(--bg-color); color: var(--text-color); transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+        .credits-text { text-align: center; flex: 1; padding: 0 20px; }
+        .credits-text p.devs { margin: 0 0 10px 0; font-size: 0.9rem; font-weight: 600; }
+        .inst-names p { margin: 3px auto; font-size: 0.85rem; opacity: 0.8; max-width: 300px; line-height: 1.4; }
+        .footer-logo { height: 60px; width: auto; object-fit: contain; flex-shrink: 0; transition: filter 0.3s ease; }
+        [data-theme="dark"] .footer-logo { filter: invert(1) hue-rotate(180deg); }
+
+        @media (max-width: 768px) {
+            .drawer { box-shadow: 2px 0 15px rgba(0,0,0,0.15); }
+            .content-container { padding: 20px; }
+            .iframe-container { aspect-ratio: 4 / 3; }
+            .title-block h1 { font-size: 2.5rem; }
+            .site-footer { flex-direction: column; gap: 20px; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="icon-btn menu-toggle" id="menu-toggle-btn" title="Toggle Menu">☰</button>
+    <div class="controls-container">
+        <button class="icon-btn" id="theme-icon" title="Toggle Dark Mode">🌙</button>
+    </div>
+
+    <button class="float-credits-btn" id="float-credits-btn" title="View Credits">ℹ️</button>
+
+    <div class="drawer collapsed" id="toc-drawer">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#sec-0">Introduction</a></li>
+            <li><a href="#sec-1">Cubes</a></li>
+            <li><a href="#sec-2">Brightness Temperature</a></li>
+            <li><a href="#sec-3">Lightcones</a></li>
+            <li><a href="#sec-4">Spectra</a></li>
+            <li><a href="#sec-5">Power Spectra</a>
+                <ul class="sub-menu">
+                    <li><a href="#sec-5-1">Spherically Averaged PS</a></li>
+                    <li><a href="#sec-5-2">Cylindrically Averaged PS</a></li>
+                </ul>
+            </li>
+            <li><a href="#references-section">Bibliography</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content" id="main-scroll-area">
+        <div class="title-block" id="main-title-block">
+            <h1>21cmFAST</h1>
+        </div>
+
+        <div class="content-container" id="dynamic-content-container">
+            
+            <section id="sec-0">
+                <h1>Introduction</h1>
+            </section>
+            
+            <section id="sec-1">
+                <h1>Cubes</h1>
+                <h2>Visualizing the Cube</h2>
+                <p>This visualization presents a specific tomographic cross-section of the simulated universe. The axes map the physical dimensions of the slice in Megaparsecs (Mpc), while the color gradient illustrates local variations in the 21cm differential brightness temperature. The observable heterogeneity highlights the spatial distribution of early heating and local gas density before the onset of widespread ionization.</p>
+                <div class="graph-island">
+                    <div class="iframe-container" style="aspect-ratio: 7 / 10;">
+                        <iframe data-src="plots/heatmap_slice_slider_with_trace_z_12.7877.html"></iframe>
+                    </div>
+                    <details>
+                        <summary>Show Python Code</summary>
+                        <pre><code class="language-python" data-src="code/heatmap_slice_slider_with_trace_z_12.7877.py">Loading python script...</code></pre>
+                    </details>
+                </div>
+            </section>
+
+            <section id="sec-2">
+                <h1>Brightness Temperature</h1>
+                
+                <h2>Evolution of Brightness Temperature of IGM in 3D</h2>
+                <p>This interactive tool models a full 3D data cube of the spatial volume, allowing for the continuous temporal evaluation of the 21cm field across varying cosmic epochs. At higher redshifts, the volume exhibits widespread positive emission, indicating a saturated spin temperature and an intact neutral fraction. As the timeline progresses toward lower redshifts, expanding spherical regions of ionized plasma emerge. Within these regions, the neutral hydrogen fraction is reduced to zero, correspondingly extinguishing the local differential brightness temperature.</p>
+                <div class="graph-island">
+                    <div class="iframe-container"><iframe data-src="plots/volume_brightness_temperature_redshift_slider.html"></iframe></div>
+                    <details>
+                        <summary>Show Python Code</summary>
+                        <pre><code class="language-python" data-src="code/volume_brightness_temperature_redshift_slider.py">Loading python script...</code></pre>
+                    </details>
+                </div>
+            </section>
+
+            <section id="sec-3">
+                <h1>Lightcones</h1>
+                <h2>2D Cross Section of Lightcone</h2>
+                <p>To accurately model observational reality, this visualization maps discrete spatial states into a continuous flow of cosmic time. The horizontal axis represents redshift, effectively serving as the line-of-sight timeline where cosmological distance is derived from the Hubble parameter. Moving forward in time (from right to left) illustrates the continuous destruction of neutral hydrogen as ionized regions expand, merge, and ultimately dominate the intergalactic medium.</p>
+                <div class="graph-island">
+                    <div class="iframe-container"><iframe data-src="plots/heatmap_light_cone.html"></iframe></div>
+                    <details>
+                        <summary>Show Python Code</summary>
+                        <pre><code class="language-python" data-src="code/heatmap_light_cone.py">Loading python script...</code></pre>
+                    </details>
+                </div>
+                
+                <h2>3D Lightcone</h2>
+                <p>Extending the lightcone into three dimensions reveals the true volumetric topology of the Epoch of Reionization. The integration of two transverse spatial axes with a line-of-sight temporal axis mimics the data structure obtained by radio interferometers. The visualization tracks the structural transition from a fully heated, continuous neutral medium at early times to a highly fragmented state characterized by large-scale ionized voids at later times.</p>
+                <div class="graph-island">
+                    <div class="iframe-container"><iframe data-src="plots/volume_light_cone.html"></iframe></div>
+                    <details>
+                        <summary>Show Python Code</summary>
+                        <pre><code class="language-python" data-src="code/volume_light_cone.py">Loading python script...</code></pre>
+                    </details>
+                </div>
+            </section>
+
+            <section id="sec-4">
+                <h1>Spectra</h1>
+                <p>The Global Frequency Spectrum distills the spatially-dependent variations of the universe into a 1D spatial volume average. The curve establishes a baseline of pure emission that progressively attenuates as observed frequency increases. This reduction highlights the macroscopic progression of the Epoch of Reionization; as the global neutral hydrogen fraction drops toward zero and the universe expands, the global differential signal is correspondingly extinguished.</p>
+                <div class="graph-island">
+                    <div class="iframe-container"><iframe data-src="plots/global_frequency_spectrum.html"></iframe></div>
+                   <details>
+                        <summary>Show Python Code</summary>
+                        <pre><code class="language-python" data-src="code/global_frequency_spectrum.py">Loading python script...</code></pre>
+                    </details>
+                </div>
+            </section>
+
+            <section id="sec-5">
+                <h1>Power Spectra</h1>
+                <h2 id="sec-5-1">The 1D Power Spectrum: Spherical Average</h2>
+                <p>This visualization calculates the variance of the temperature fluctuations by converting the 3D spatial field into Fourier space and averaging the signal spherically. The resulting dimensionless power spectrum quantifies the amplitude of structural variations at different physical scales. The variance reaches its maximum amplitude during the intersection of early heating and initial ionization, creating maximum spatial contrast, before uniformly decaying across all scales as global ionization progresses.</p>
+                <div class="graph-island">
+                    <div class="iframe-container"><iframe data-src="plots/spherically_averaged_power_spectrum.html"></iframe></div>
+                    <details>
+                        <summary>Show Python Code</summary>
+                        <pre><code class="language-python" data-src="code/spherically_averaged_power_spectrum.py">Loading python script...</code></pre>
+                    </details>
+                </div>
+                
+                <h2 id="sec-5-2">The 2D Power Spectrum: Cylindrical Average</h2>
+                <p>To account for physical anisotropies such as redshift-space distortions, the power spectrum is decomposed into perpendicular and parallel wave modes. Averaging the Fourier modes in cylindrical bins isolates the transverse spatial scales from the line-of-sight scales. At late cosmic times, this heatmap demonstrates that small-scale fluctuations are largely smoothed over by widespread ionization, leaving the most prominent temperature variances concentrated primarily at large spatial scales.</p>
+                <div class="graph-island">
+                    <div class="iframe-container"><iframe data-src="plots/cylindrically_averaged_power_spectrum_redshift_slider.html"></iframe></div>
+                    <details>
+                        <summary>Show Python Code</summary>
+                        <pre><code class="language-python" data-src="code/cylindrically_averaged_power_spectrum_redshift_slider.py">Loading python script...</code></pre>
+                    </details>
+                </div>
+            </section>
+            
+        </div>
+
+        <div class="content-container" id="references-section">
+            <h2>Bibliography</h2>
+            <ul id="references-list"></ul>
+        </div>
+
+        <footer class="site-footer" id="site-footer">
+            <img src="assets/cassa.png" alt="Logo-CASSA" class="footer-logo">
+            <div class="credits-text">
+                <p class="devs">Developed by Raufoon Shafiq & Namirah Nakib</p>
+                <div class="inst-names">
+                    <p>Center for Astronomy and<br>Space Science and Astrophysics (CASSA)</p>
+                    <p>Independent University, Bangladesh</p>
+                </div>
+            </div>
+            <img src="assets/iub.png" style="height: 100px;" alt="Logo-Independent University, Bangladesh" class="footer-logo">
+        </footer>
+    </div>
+
+    <script>
+        const drawer = document.getElementById('toc-drawer');
+        const menuToggleBtn = document.getElementById('menu-toggle-btn');
+        const mainScrollArea = document.getElementById('main-scroll-area');
+        const titleBlock = document.getElementById('main-title-block');
+        const themeIcon = document.getElementById('theme-icon');
+        const contentContainer = document.getElementById('dynamic-content-container');
+        const hljsTheme = document.getElementById('hljs-theme');
+        const siteFooter = document.getElementById('site-footer');
+        const floatCreditsBtn = document.getElementById('float-credits-btn');
+
+        async function loadSections() {
+            // 1. Fetch JSON Data for Bibliography
+            let citationData = {};
+            let referenceMapping = {};
+            try {
+                const [citeRes, refRes] = await Promise.all([
+                    fetch('citations.json'),
+                    fetch('references.json')
+                ]);
+                if (citeRes.ok) citationData = await citeRes.json();
+                if (refRes.ok) referenceMapping = await refRes.json();
+            } catch (err) { console.warn("Could not load data files", err); }
+
+            // 2. Build Bibliography List
+            const refList = document.getElementById('references-list');
+            if (refList) {
+                const uniqueSources = new Map();
+                Object.values(citationData).forEach(entry => {
+                    if (entry.source !== "None" && entry.source_id && entry.source_id.length > 0) {
+                        entry.source_id.forEach(id => {
+                            if (!uniqueSources.has(id)) {
+                                const fullCite = referenceMapping[entry.source] || entry.source;
+                                uniqueSources.set(id, fullCite);
+                            }
+                        });
+                    }
+                });
+                Array.from(uniqueSources.keys()).sort((a, b) => a - b).forEach(id => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<strong>[${id}]</strong> ${uniqueSources.get(id)}`;
+                    refList.appendChild(li);
+                });
+            }
+
+            // 3. Trigger MathJax
+            if (window.MathJax) MathJax.typesetPromise();
+
+            // 4. Highlight.js
+            const codeBlocks = document.querySelectorAll('pre code');
+            for (const block of codeBlocks) {
+                const src = block.getAttribute('data-src');
+                if (src) {
+                    try {
+                        const codeResponse = await fetch(src);
+                        if (codeResponse.ok) block.textContent = await codeResponse.text();
+                    } catch (err) { block.textContent = `# Error fetching code file.`; }
+                }
+                hljs.highlightElement(block);
+            }
+
+            // 5. Iframe Setup
+            const iframes = document.querySelectorAll('iframe[data-src]');
+            iframes.forEach(iframe => {
+                const parent = iframe.parentElement;
+                const loader = document.createElement('div');
+                loader.className = 'iframe-loader';
+                loader.innerHTML = '<div class="spinner"></div>';
+                parent.appendChild(loader);
+
+                const reloadBtn = document.createElement('button');
+                reloadBtn.className = 'reload-btn';
+                reloadBtn.title = 'Reload Graph';
+                reloadBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M12 2.75a9.25 9.25 0 1 0 4.737 17.197l-1.043-1.713A7.25 7.25 0 1 1 12 4.75v3.5l4.5-4.5-4.5-4.5v3.5z"/></svg>`;
+                reloadBtn.onclick = () => {
+                    iframe.classList.remove('loaded');
+                    loader.classList.remove('hidden');
+                    setTimeout(() => { iframe.src = iframe.src; }, 300);
+                };
+                parent.appendChild(reloadBtn);
+
+                iframe.addEventListener('load', () => {
+                    iframe.classList.add('loaded'); 
+                    loader.classList.add('hidden');
+                });
+                iframe.src = iframe.getAttribute('data-src');
+            });
+        }
+
+        loadSections();
+
+        // UI Helpers
+        mainScrollArea.addEventListener('scroll', () => {
+            if (mainScrollArea.scrollTop > 50) titleBlock.classList.add('compact');
+            else titleBlock.classList.remove('compact');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!drawer.classList.contains('collapsed') && !drawer.contains(e.target) && !menuToggleBtn.contains(e.target)) {
+                drawer.classList.add('collapsed');
+            }
+        });
+
+        menuToggleBtn.addEventListener('click', () => drawer.classList.toggle('collapsed'));
+
+        const footerObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) floatCreditsBtn.classList.remove('visible'); 
+                else floatCreditsBtn.classList.add('visible'); 
+            });
+        }, { threshold: 0 }); 
+        footerObserver.observe(siteFooter);
+
+        floatCreditsBtn.addEventListener('click', () => mainScrollArea.scrollTo({ top: mainScrollArea.scrollHeight, behavior: 'smooth' }));
+
+        function updateThemeElements(theme) {
+            themeIcon.innerText = theme === 'dark' ? '☀️' : '🌙';
+            hljsTheme.href = theme === 'dark' ? 
+                "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css" : 
+                "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-light.min.css";
+        }
+
+        themeIcon.addEventListener('click', () => {
+            const body = document.documentElement;
+            const isDark = body.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                updateThemeElements('light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeElements('dark');
+            }
+        });
+
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            updateThemeElements('dark');
+        } else updateThemeElements('light');
+    </script>
+</body>
+</html>

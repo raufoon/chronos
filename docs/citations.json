@@ -1,0 +1,544 @@
+{
+  "1": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "1",
+    "source_id": [1],
+    "analysis": "We introduce a powerful semi-numeric modeling tool, 21cmFAST, designed to efficiently simulate the cosmological 21-cm signal."
+  },
+  "2": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "1",
+    "source_id": [1],
+    "analysis": "Our code generates 3D realizations of evolved density, ionization, peculiar velocity, and spin temperature fields... Through a combination of the excursion-set formalism and perturbation theory..."
+  },
+  "3": {
+    "source": "Mesinger et al. 2007",
+    "page_num": "2",
+    "source_id": [2],
+    "analysis": "Our linear density field is generated in much the same way as it is for N-body codes... We construct a linear velocity field corresponding to our linear density field..."
+  },
+  "4": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "2",
+    "source_id": [1],
+    "analysis": "...we then approximate gravitational collapse by moving each initial matter particle... according to first-order perturbation theory (Zel'Dovich 1970)."
+  },
+  "5": {
+    "source": "Mesinger et al. 2007",
+    "page_num": "5",
+    "source_id": [2],
+    "analysis": "We use the excursion-set approach for identifying HII regions, pioneered by Furlanetto et al. (2004b)."
+  },
+  "6": {
+    "source": "Mesinger et al. 2007",
+    "page_num": "5",
+    "source_id": [2],
+    "analysis": "The foundation of this approach is to require that the number of ionizing photons inside a region be larger than the number of hydrogen atoms it contains..."
+  },
+  "7": {
+    "source": "Mesinger et al. 2007",
+    "page_num": "6",
+    "source_id": [2],
+    "analysis": "If so, we flag all pixels inside that region as ionized... regardless of whether the resulting bubble would overlap with other bubbles."
+  },
+  "8": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "1",
+    "source_id": [1],
+    "analysis": "Our code generates 3D realizations of evolved density, ionization, peculiar velocity, and spin temperature fields..."
+  },
+  "10": {
+    "source": "Hogg 2000",
+    "page_num": "1, 4",
+    "source_id": [4],
+    "analysis": "the speed of light c times the Hubble time is the Hubble distance DH = c/H0 ... E(z) \\equiv \\sqrt{\\Omega_M(1+z)^3 + \\Omega_k(1+z)^2 + \\Omega_\\Lambda} ... H(z) = H_0 E(z) is the Hubble constant as measured by a hypothetical astronomer working at redshift z ... dz/E(z) is proportional to the time-of-flight of a photon traveling across the redshift interval dz ... The total line-of-sight comoving distance is then given by integrating these contributions, or D_C = D_H \\int_0^z \\frac{dz'}{E(z')}"
+  },
+  "11": {
+    "source": "Hogg 2000",
+    "page_num": "7",
+    "source_id": [4],
+    "analysis": "The comoving volume V_C is the volume measure in which number densities of non-evolving objects locked into Hubble flow are constant with redshift. It is the proper volume times three factors of the relative scale factor now to then, or (1+z)^3."
+  },
+  "19": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "3",
+    "source_id": [1],
+    "analysis": "The Lagrangian space ICs used for 21cmFAST were initialized at $z=300$ on a $1536^3$ grid."
+  },
+  "20": {
+    "source": "Mesinger et al. 2007",
+    "page_num": "2",
+    "source_id": [2],
+    "analysis": "with wavelengths larger than the box size $L=$..."
+  },
+  "21": {
+    "source": "Mesinger et al. 2007",
+    "page_num": "2",
+    "source_id": [2],
+    "analysis": "...homogeneity implies that there are no density fluctuations with wavelengths larger than the box size... Fourier transform conventions..."
+  },
+  "22": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "2",
+    "source_id": [1],
+    "analysis": "...we then approximate gravitational collapse by moving each initial matter particle... according to first-order perturbation theory (Zel'Dovich 1970)."
+  },
+  "23": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "1",
+    "source_id": [1],
+    "analysis": "Our code generates 3D realizations of evolved density, ionization, peculiar velocity, and spin temperature fields..."
+  },
+  "24": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "3",
+    "source_id": [1],
+    "analysis": "This allows efficient use of available memory..."
+  },
+  "25": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "26": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "27": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "28": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "29": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "30": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "164",
+    "source_id": [5],
+    "analysis": " the observable quantity is the brightness temperature decrement $\\delta T_b$."
+  },
+  "32": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "2",
+    "source_id": [1],
+    "analysis": "$\\delta T_b(\\nu) \\approx 27 x_{HI}(1+\\delta_{nl}) \\left( \\frac{\\Omega_b h^2}{0.023} \\right) \\left( \\frac{0.15}{\\Omega_m h^2} \\frac{1+z}{10} \\right)^{1/2} (1 - T_\\gamma / T_S) \\text{ mK}$"
+  },
+  "33": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "91",
+    "source_id": [5],
+    "analysis": "These objects change the spin temperature (through Wouthuysen-Field coupling), the kinetic temperature (through X-rays), and of course the ionized fraction."
+  },
+  "34": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "10",
+    "source_id": [5],
+    "analysis": "... is the fractional overdensity in baryons... the optical depth of this transition is... proportional to the number density of neutral hydrogen."
+  },
+  "35": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "81",
+    "source_id": [5],
+    "analysis": " the IGM can be seen in 21 cm absorption against the CMB, with a peak signal"
+  },
+  "36": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "15",
+    "source_id": [1],
+    "analysis": "X-rays start permeating the IGM. The fluctuations in $\\delta T_b$ are now at their maximum, as regions close to X-ray sources are heated above the CMB temperature, $\\delta T_b > 0$..."
+  },
+  "38": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "9",
+    "source_id": [5],
+    "analysis": "Put simply, the goal is to use this line to map the neutral gas before and during reionization."
+  },
+  "39": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "40": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "43": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "49": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "50": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "7",
+    "source_id": [1],
+    "analysis": "...assuming $\\bar{x}_{HI}=1$"
+  },
+  "51": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "10",
+    "source_id": [1],
+    "analysis": "...simplifying assumption of working in the post-heating regime: $T_S \\gg T_\\gamma$"
+  },
+  "52": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "2",
+    "source_id": [1],
+    "analysis": "$\\delta T_b(\\nu) \\approx 27 x_{HI}(1+\\delta_{nl}) ...$"
+  },
+  "54": {
+    "source": "Hogg 2000",
+    "page_num": "1",
+    "source_id": [4],
+    "analysis": "Earth-bound observers look back in time as they look out in distance."
+  },
+  "55": {
+    "source": "Hogg 2000",
+    "page_num": "8",
+    "source_id": [4],
+    "analysis": "The lookback time $t_L$ to an object is the difference between the age $t_0$ of the Universe now and the age $t_e$ of the Universe at the time the photons were emitted..."
+  },
+  "56": {
+    "source": "Hogg 2000",
+    "page_num": "4",
+    "source_id": [4],
+    "analysis": "$D_C = \\frac{c}{H_0} \\int_0^z \\frac{dz'}{E(z')}$"
+  },
+  "57": {
+    "source": "Hogg 2000",
+    "page_num": "4",
+    "source_id": [4],
+    "analysis": "$E(z) = \\sqrt{\\Omega_M(1+z)^3 + \\Omega_k(1+z)^2 + \\Omega_\\Lambda}$"
+  },
+  "58": {
+    "source": "Kaiser 1987",
+    "page_num": "1",
+    "source_id": [6],
+    "analysis": "Peculiar velocities distort the clustering pattern in redshift space on all scales."
+  },
+  "60": {
+    "source": "Barkana & Loeb 2005",
+    "page_num": "1",
+    "source_id": [7],
+    "analysis": "Peculiar velocities increase the power spectrum... and introduce an angular dependence in Fourier space."
+  },
+  "61": {
+    "source": "Hogg 2000",
+    "page_num": "1",
+    "source_id": [4],
+    "analysis": "...trajectories of photons which terminate at the observer."
+  },
+  "62": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "63": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "65": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "66": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "67": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "69": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "73": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "75": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "79",
+    "source_id": [9],
+    "analysis": " because it is a spectral line, the 21 cm background is not a single full-sky map but rather a series of them at many closely-spaced redshifts"
+  },
+  "76": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "125",
+    "source_id": [5],
+    "analysis": "$\\nu = 1420 / (1+z)$ MHz."
+  },
+  "77": {
+    "source": "Field 1958",
+    "page_num": "241",
+    "source_id": [10],
+    "analysis": "...radiation at 1420.4 mc..."
+  },
+
+
+  "78": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "125",
+    "source_id": [5],
+    "analysis": "$\\nu = 1420 / (1+z)$ MHz."
+  },
+  "79": {
+    "source": "Hogg 2000",
+    "page_num": "1",
+    "source_id": [4],
+    "analysis": "Earth-bound observers look back in time as they look out in distance."
+  },
+  "80": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "6",
+    "source_id": [5],
+    "analysis": "...use overbars to denote global averages of these quantities..."
+  },
+  "81": {
+    "source": "Barkana & Loeb 2005",
+    "page_num": "1",
+    "source_id": [7],
+    "analysis": "Fluctuations in the 21cm brightness from cosmic hydrogen... were sourced by the primordial density perturbations..."
+  },
+  "82": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "24",
+    "source_id": [5],
+    "analysis": "$T_{S}^{-1}=\\frac{T_{\\gamma}^{-1}+x_{c}T_{K}^{-1}+x_{\\alpha}T_{c}^{-1}}{1+x_{c}+x_{\\alpha}}$"
+  },
+  "83": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "15",
+    "source_id": [5],
+    "analysis": "...Ly$\\alpha$ coupling is likely to become efficient before the IGM is heated significantly."
+  },
+  "84": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "15",
+    "source_id": [5],
+    "analysis": "Ly$\\alpha$ coupling begins to saturate as most of the IGM has a spin temperature which is strongly coupled to the kinetic temperature"
+  },
+  "85": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "2",
+    "source_id": [1],
+    "analysis": "...simplifying assumption of working in the post-heating regime: $T_S \\gg T_\\gamma$"
+  },
+  "86": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "2",
+    "source_id": [1],
+    "analysis": "$\\delta T_b(\\nu) \\approx 27 x_{HI}(1+\\delta_{nl}) \\left( \\frac{\\Omega_b h^2}{0.023} \\right) \\left( \\frac{0.15}{\\Omega_m h^2} \\frac{1+z}{10} \\right)^{1/2} (1 - T_\\gamma / T_S) \\text{ mK}$"
+  },
+  "87": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "88": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "89": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "90": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "91": {
+    "source": "None",
+    "page_num": "N/A",
+    "source_id": [],
+    "analysis": "N/A"
+  },
+  "95": {
+    "source": "Morales & Hewitt 2004",
+    "page_num": "1",
+    "source_id": [9],
+    "analysis": "This paper explores the potential for statistical epoch of reionization (EOR) measurements... directly observe the power spectrum..."
+  },
+  "96": {
+    "source": "Barkana & Loeb 2005",
+    "page_num": "1",
+    "source_id": [7],
+    "analysis": "...separation of the power spectrum into several components... in Fourier space."
+  },
+  "97": {
+    "source": "Barkana & Loeb 2005",
+    "page_num": "2",
+    "source_id": [7],
+    "analysis": "$\\tilde{f}(\\mathbf{k})=\\int d^{3}x f(\\mathbf{x})e^{-i\\mathbf{k}\\cdot\\mathbf{x}}$"
+  },
+  "98": {
+    "source": "Barkana & Loeb 2005",
+    "page_num": "2",
+    "source_id": [7],
+    "analysis": "...the isotropic real-space power spectrum $P_{\\mu^0}(k)$..."
+  },
+  "99": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "8",
+    "source_id": [1],
+    "analysis": "$\\Delta^2(k) = k^3 P(k) / (2\\pi^2)$"
+  },
+  "100": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "82",
+    "source_id": [5],
+    "analysis": "The power spectrum $P_{21}(k)$ therefore measures the typical size of HII regions."
+  },
+  "101": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "82",
+    "source_id": [5],
+    "analysis": "The power spectrum $P_{21}(k)$ therefore measures the typical size of HII regions."
+  },
+  "102": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "12",
+    "source_id": [5],
+    "analysis": "The 21 cm signal will therefore contain fluctuations in three dimensions..."
+  },
+  "103": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "12",
+    "source_id": [5],
+    "analysis": "$\\delta_{21} = \\beta \\delta + \\beta_x \\delta_x + \\beta_\\alpha \\delta_\\alpha + \\beta_T \\delta_T$"
+  },
+  "104": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "12",
+    "source_id": [5],
+    "analysis": "Here, $\\delta$, $\\delta_{x}$, and $\\delta_{T}$ denote the fractional perturbations to the density, ionized fraction, and spin temperature respectively."
+  },
+  "105": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "12",
+    "source_id": [5],
+    "analysis": "...expansion coefficients..."
+  },
+  "106": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "80",
+    "source_id": [5],
+    "analysis": "The relative importance of the different terms... depends on the cosmic epoch."
+  },
+  "107": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "80",
+    "source_id": [5],
+    "analysis": "Before reionization begins, $x_{HI} \\approx 1$ everywhere... fluctuations in the spin temperature will dominate the 21 cm signal."
+  },
+  "108": {
+    "source": "Mesinger et al. 2010",
+    "page_num": "8",
+    "source_id": [1],
+    "analysis": "The fluctuations in $\\delta T_b$ are now at their maximum, as regions close to X-ray sources are heated above the CMB temperature..."
+  },
+  "109": {
+    "source": "Furlanetto et al. 2006",
+    "page_num": "82",
+    "source_id": [5],
+    "analysis": "Finally, as reionization progresses, the HII regions grow and merge... The 21 cm power spectrum will then decline."
+  },
+  "110": {
+    "source": "Barkana & Loeb 2005",
+    "page_num": "1",
+    "source_id": [7],
+    "analysis": "...we propose a method to separate these components based on the angular dependence of the 21cm fluctuation power spectrum."
+  },
+  "111": {
+    "source": "Morales & Hewitt 2004",
+    "page_num": "3",
+    "source_id": [9],
+    "analysis": "The component of $\\mathbf{k}$ along the line of sight is $k_\\parallel$..."
+  },
+  "112": {
+    "source": "Morales & Hewitt 2004",
+    "page_num": "3",
+    "source_id": [9],
+    "analysis": "The component of $\\mathbf{k}$ along the line of sight is $k_\\parallel$..."
+  },
+  "113": {
+    "source": "Morales & Hewitt 2004",
+    "page_num": "3",
+    "source_id": [9],
+    "analysis": "The component of $\\mathbf{k}$ along the line of sight is $k_\\parallel$..."
+  },
+  "114": {
+    "source": "Barkana & Loeb 2005",
+    "page_num": "2",
+    "source_id": [7],
+    "analysis": "$\\langle\\tilde{f}(\\mathbf{k})\\tilde{f}^{*}(\\mathbf{k}^{\\prime})\\rangle=(2\\pi)^{3}\\delta_{D}(\\mathbf{k}-\\mathbf{k}^{\\prime})P(\\mathbf{k})$"
+  },
+  "115": {
+    "source": "Barkana & Loeb 2005",
+    "page_num": "1",
+    "source_id": [7],
+    "analysis": "Peculiar velocities... introduce an angular dependence in Fourier space."
+  },
+  "116": {
+    "source": "Barkana & Loeb 2005",
+    "page_num": "2",
+    "source_id": [7],
+    "analysis": "$P(\\mathbf{k}) = P_{\\mu^0}(k) + \\mu^2 P_{\\mu^2}(k) + \\mu^4 P_{\\mu^4}(k)$"
+  },
+  "117": {
+    "source": "Morales & Hewitt 2004",
+    "page_num": "2",
+    "source_id": [9],
+    "analysis": "...residual foreground emission is localized to low $k_\\parallel$."
+  },
+  "118": {
+    "source": "Morales & Hewitt 2004",
+    "page_num": "2",
+    "source_id": [9],
+    "analysis": "At higher $k_\\parallel$ the residual foregrounds are extremely small, allowing very sensitive measurements of the EOR power spectrum."
+  }
+}
