@@ -320,7 +320,7 @@
                 <h2>Evolution of Brightness Temperature of IGM in 3D</h2>
                 <p>This interactive tool models a full 3D data cube of the spatial volume, allowing for the continuous temporal evaluation of the 21cm field across varying cosmic epochs. At higher redshifts, the volume exhibits widespread positive emission, indicating a saturated spin temperature and an intact neutral fraction. As the timeline progresses toward lower redshifts, expanding spherical regions of ionized plasma emerge. Within these regions, the neutral hydrogen fraction is reduced to zero, correspondingly extinguishing the local differential brightness temperature.</p>
                 <div class="graph-island">
-                    <div class="iframe-container"><iframe data-src="plots/volume_brightness_temperature_redshift_slider.html"></iframe></div>
+                    <div class="iframe-container" style="aspect-ratio: 1 / 1;"><iframe data-src="plots/volume_brightness_temperature_redshift_slider.html"></iframe></div>
                     <details>
                         <summary>Show Python Code</summary>
                         <pre><code class="language-python" data-src="code/volume_brightness_temperature_redshift_slider.py">Loading python script...</code></pre>
@@ -333,7 +333,7 @@
                 <h2>2D Cross Section of Lightcone</h2>
                 <p>To accurately model observational reality, this visualization maps discrete spatial states into a continuous flow of cosmic time. The horizontal axis represents redshift, effectively serving as the line-of-sight timeline where cosmological distance is derived from the Hubble parameter. Moving forward in time (from right to left) illustrates the continuous destruction of neutral hydrogen as ionized regions expand, merge, and ultimately dominate the intergalactic medium.</p>
                 <div class="graph-island">
-                    <div class="iframe-container"><iframe data-src="plots/heatmap_light_cone.html"></iframe></div>
+                    <div class="iframe-container" style="aspect-ratio: 16 / 9;"><iframe data-src="plots/heatmap_light_cone.html"></iframe></div>
                     <details>
                         <summary>Show Python Code</summary>
                         <pre><code class="language-python" data-src="code/heatmap_light_cone.py">Loading python script...</code></pre>
@@ -343,7 +343,7 @@
                 <h2>3D Lightcone</h2>
                 <p>Extending the lightcone into three dimensions reveals the true volumetric topology of the Epoch of Reionization. The integration of two transverse spatial axes with a line-of-sight temporal axis mimics the data structure obtained by radio interferometers. The visualization tracks the structural transition from a fully heated, continuous neutral medium at early times to a highly fragmented state characterized by large-scale ionized voids at later times.</p>
                 <div class="graph-island">
-                    <div class="iframe-container"><iframe data-src="plots/volume_light_cone.html"></iframe></div>
+                    <div class="iframe-container" style="aspect-ratio: 1/1;"><iframe data-src="plots/volume_light_cone.html"></iframe></div>
                     <details>
                         <summary>Show Python Code</summary>
                         <pre><code class="language-python" data-src="code/volume_light_cone.py">Loading python script...</code></pre>
@@ -355,7 +355,7 @@
                 <h1>Spectra</h1>
                 <p>The Global Frequency Spectrum distills the spatially-dependent variations of the universe into a 1D spatial volume average. The curve establishes a baseline of pure emission that progressively attenuates as observed frequency increases. This reduction highlights the macroscopic progression of the Epoch of Reionization; as the global neutral hydrogen fraction drops toward zero and the universe expands, the global differential signal is correspondingly extinguished.</p>
                 <div class="graph-island">
-                    <div class="iframe-container"><iframe data-src="plots/global_frequency_spectrum.html"></iframe></div>
+                    <div class="iframe-container" style="aspect-ratio: 10/9;"><iframe data-src="plots/global_frequency_spectrum.html"></iframe></div>
                    <details>
                         <summary>Show Python Code</summary>
                         <pre><code class="language-python" data-src="code/global_frequency_spectrum.py">Loading python script...</code></pre>
@@ -368,7 +368,7 @@
                 <h2 id="sec-5-1">The 1D Power Spectrum: Spherical Average</h2>
                 <p>This visualization calculates the variance of the temperature fluctuations by converting the 3D spatial field into Fourier space and averaging the signal spherically. The resulting dimensionless power spectrum quantifies the amplitude of structural variations at different physical scales. The variance reaches its maximum amplitude during the intersection of early heating and initial ionization, creating maximum spatial contrast, before uniformly decaying across all scales as global ionization progresses.</p>
                 <div class="graph-island">
-                    <div class="iframe-container"><iframe data-src="plots/spherically_averaged_power_spectrum.html"></iframe></div>
+                    <div class="iframe-container" style="aspect-ratio: 10/9;"><iframe data-src="plots/spherically_averaged_power_spectrum.html"></iframe></div>
                     <details>
                         <summary>Show Python Code</summary>
                         <pre><code class="language-python" data-src="code/spherically_averaged_power_spectrum.py">Loading python script...</code></pre>
@@ -378,7 +378,7 @@
                 <h2 id="sec-5-2">The 2D Power Spectrum: Cylindrical Average</h2>
                 <p>To account for physical anisotropies such as redshift-space distortions, the power spectrum is decomposed into perpendicular and parallel wave modes. Averaging the Fourier modes in cylindrical bins isolates the transverse spatial scales from the line-of-sight scales. At late cosmic times, this heatmap demonstrates that small-scale fluctuations are largely smoothed over by widespread ionization, leaving the most prominent temperature variances concentrated primarily at large spatial scales.</p>
                 <div class="graph-island">
-                    <div class="iframe-container"><iframe data-src="plots/cylindrically_averaged_power_spectrum_redshift_slider.html"></iframe></div>
+                    <div class="iframe-container" style="aspect-ratio: 9/10;"><iframe data-src="plots/cylindrically_averaged_power_spectrum_redshift_slider.html"></iframe></div>
                     <details>
                         <summary>Show Python Code</summary>
                         <pre><code class="language-python" data-src="code/cylindrically_averaged_power_spectrum_redshift_slider.py">Loading python script...</code></pre>
