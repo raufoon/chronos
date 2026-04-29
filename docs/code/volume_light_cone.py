@@ -17,7 +17,7 @@ fig.add_trace(go.Volume(
     isomin=dTb_cone_min, isomax=dTb_cone_max,
     opacity=0.2, surface_count=5,
     colorscale="Rainbow",
-    colorbar=dict(title=dict(text="Brightness Temperature δT_b [mK]", side="right"), x=0.95),
+    colorbar=dict(title=dict(text="δT_b [mK]", side="right"), x=0.95),
 ))
 
 tickvals = list(range(0, len(z_cone_range), len(z_cone_range)//10))

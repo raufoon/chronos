@@ -77,7 +77,7 @@ def plot_tomographic_slice(boxes, box_len, redshift_range, cmap="Turbo", slice_p
             hoverinfo="z",
             zmax=dTb_max, zmin=dTb_min,
             colorscale=cmap,
-            colorbar=dict(title="Brightness Temperature δT_b [mK]") # <-- Add this line
+            colorbar=dict(title="δT_b [mK]") # <-- Add this line
         ))
 
     # Build the slider to toggle trace visibility

@@ -9,7 +9,7 @@ fig = go.Figure(data=go.Scatter(x=frequencies, y=global_means, mode='lines+marke
 fig.update_layout(
     title="Global Frequency Spectrum",
     xaxis_title="Frequency [MHz]",
-    yaxis_title=r"Global Brightness Temperature δT_b [mK] [mK]",
+    yaxis_title=r"Global δT_b [mK] [mK]",
     width=700, height=500
 )
 

@@ -14,7 +14,7 @@ for z in reduced_Z_PARAM_RANGE:
         isomin=dTb_min, isomax=dTb_max,
         opacity=0.2, surface_count=5,
         colorscale=mincut_colorscale("Rainbow", dTb_min, dTb_max, dTb_min),
-        colorbar=dict(title=dict(text="Brightness Temperature δT_b [mK]", side="right"), x=0.95),
+        colorbar=dict(title=dict(text="δT_b [mK]", side="right"), x=0.95),
     ))
 
 fig.data[0].visible = True

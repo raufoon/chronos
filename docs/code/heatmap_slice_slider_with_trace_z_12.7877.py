@@ -36,7 +36,7 @@ def plot_tomographic_slice(box_data, box_len, redshift, cmap="Turbo", slice_plan
             colorscale=cmap,
             visible=(slice_index == L), # Make only the last one visible by default
             showscale=True,
-            colorbar=dict(title="Brightness Temperature δT_b [mK]", len=0.45, y=0.8, yanchor="middle")
+            colorbar=dict(title="δT_b [mK]", len=0.45, y=0.8, yanchor="middle")
         ), row=1, col=1)
 
     # --- 2. Add 3D Volume Trace (Index: box_len) ---
